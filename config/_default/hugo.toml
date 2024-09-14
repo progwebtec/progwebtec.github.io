@@ -1,7 +1,7 @@
-baseURL = 'https://bkleinen.github.io'
+baseURL = 'https://progwebtec.github.io'
 
 languageCode = 'en-us'
-title = 'Prof. Dr. Barne Kleinen'
+title = 'Programming and Web Technology @ IMI'
 
 # sectionPagesMenu = "main"
 theme = "greenpage"
@@ -15,7 +15,7 @@ staticDir2 = ['static-snippets']
     target = "assets/js/bootstrap.bundle.min.js"
 
 [params]
-  subTitle = 'Website of Prof. Dr. Barne Kleinen, Professor for '
+  subTitle = 'Website of the Programming and Web Technology Group @ IMI '
   logoTitle = 'Programming and Web Technology @ IMI'
   serverencoding = "UTF-8"
   generatedLinks = true # set this to false to detect unlinked pages
