@@ -3,7 +3,7 @@ name: Deploy Staging
 on:
   push:
     branches:
-      - main  # Set a branch to deploy
+      - XXXmain  # Set a branch to deploy
     tags-ignore:
       - 'v*'
 jobs:

@@ -3,7 +3,7 @@ name: Deploy Staging Drafts
 on:
   push:
     branches:
-      - main
+      - XXXXmain
     tags-ignore:
       - 'v*'
 jobs:

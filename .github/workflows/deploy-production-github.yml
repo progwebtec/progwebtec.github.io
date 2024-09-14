@@ -3,7 +3,7 @@ name: Deploy Production / Github
 on:
   push:
     tags:
-      - 'v*'
+      - 'XXXv*'
 
 jobs:
   deploy:
