@@ -1,5 +1,5 @@
 ---
-title: B1 Informatics 1 WS 2023/24
+title: B1 Informatics 1 WS 24/25
 short_title: Info1
 pageTitle: Overview
 author: kleinen
