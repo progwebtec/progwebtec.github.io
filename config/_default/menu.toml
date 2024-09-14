@@ -74,12 +74,7 @@
   pageref = '/studies'
   weight = -170
 
-[[main]]
-parent = 'studies'
-identifier = '/studies/thesis/'
-name = 'Thesis'
-pageref = '/studies/thesis'
-weight = 10
+
 
 [[main]]
 parent = 'studies'
