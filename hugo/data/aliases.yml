@@ -1,0 +1,15 @@
+# this file is generated from front matter aliases with make aliases_update
+# these shortcuts/aliases are used in the back to course link in material, 
+# they do not work as an url alias!
+broken_link:  /misc/about.md
+info2:  /classes/ss2024/info2/_index.md
+projects:  /classes/ss2024/projects/_index.md
+m1-web:  /classes/ss2024/m1-web/_index.md
+m17-masterseminar:  /classes/ss2024/m17-masterseminar/_index.md
+theses:  /classes/ws2021/theses/_index.md
+project:  /classes/ws2021/project/_index.md
+networks:  /classes/ws2021/networks/_index.md
+wt1:  /classes/ws2021/m-wt1-webapplications/_index.md
+info3:  /classes/ss2023/info3/_index.md
+info1:  /classes/ws2023/info1/_index.md
+sketchnotes:  /material/visual/sketchnotes.md
