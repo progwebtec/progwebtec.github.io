@@ -4,7 +4,9 @@ author: kleinen
 CourseNav: Info3
 aliases: /info3/
 weight: 10
-
+params:
+  author: 'Barne Kleinen'
+  lecturer: 'Prof. Kleinen'
 
 # ersetzt durch CourseNav: in pages
 #

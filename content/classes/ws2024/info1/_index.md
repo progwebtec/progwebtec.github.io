@@ -18,7 +18,8 @@ courseNavExt:
   link: https://lsf.htw-berlin.de/qisserver/rds?state=wplan&act=stg&pool=stg&show=plan&P.vx=mittel&P.subc=plan&subdir=stg&week=-10&k_abstgv.abstgvnr=231&r_zuordabstgv.semvonint=1&r_zuordabstgv.sembisint=1
 - title: Lecture Source Code
   link: https://github.com/htw-imi-info1
-
+params:
+  lecturer: 'Prof. Hajinejad'
 ---
 
 ## Welcome!
