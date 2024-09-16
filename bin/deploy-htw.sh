@@ -26,17 +26,13 @@ if [ $? -ne 0 ]; then
     exit $?
 fi
 
-<<<<<<< HEAD:bin/deploy-htw.sh
-hugo  --source hugo --destination ../public-htw --environment htw
-=======
 git log --pretty=format:'%h' -n 1 > commit.txt
 jekyll build --config _config.yml,_htwconfigrz.yml
-cd hugo
+
 git checkout hugo_migration
 hugo -e htw --minify
 cp -r publish  ../_site_htw_rz/hugo
 cd ..
->>>>>>> a35ed90a (deploy):_bin/deploy-htw.sh
 
 if [ $? -eq 0 ]; then
     scp -r public-htw/* oxid01.rz.htw-berlin.de:/home/user/K/kleinen/public_html
@@ -44,7 +40,6 @@ else
     echo "SITE BUILD FAILED, NOT COPYING TO HTW"
     exit $?
 fi
-
 
 # note: for the scp to work, there need to be ssh keys in place for kleinenweb
 # and /home/kleinen/public_html and all files in it must belong to group kleinenweb
