@@ -9,10 +9,12 @@ draft: false
 courseNavExt:
 - title: Moodle
   link: https://moodle.htw-berlin.de/course/view.php?id=49133
-- title: LSF
-  link: https://lsf.htw-berlin.de/qisserver/rds?state=verpublish&status=init&vmfile=no&publishid=204497&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=veranstaltung
+- title: M1 in LSF
+  link: https://lsf.htw-berlin.de/qisserver/rds?state=verpublish&status=init&vmfile=no&publishid=208241&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=veranstaltung
 - title: Term Schedule in LSF
-  link: https://lsf.htw-berlin.de/qisserver/rds?state=wplan&act=stg&pool=stg&P.subc=plan&k_abstgv.abstgvnr=312&idcol=k_abstgv.abstgvnr&idval=312&k_abstgv.dtxt=internationale&r_zuordabstgv.semvonint=1&r_zuordabstgv.sembisint=4&purge=n&getglobal=n&text=Internationale+Medieninformatik+%28M%29%2C+Pr%C3%BCfungsOrdnung+20162
+  link: https://lsf.htw-berlin.de/qisserver/rds?state=wplan&act=stg&pool=stg&show=plan&P.vx=kurz&r_zuordabstgv.semvonint=1&r_zuordabstgv.sembisint=4&k_abstgv.abstgvnr=312&week=-20
+- title: This week in LSF
+  link: https://lsf.htw-berlin.de/qisserver/rds?state=wplan&act=stg&pool=stg&show=plan&P.vx=kurz&r_zuordabstgv.semvonint=1&r_zuordabstgv.sembisint=4&k_abstgv.abstgvnr=312
 params:
   author: 'Barne Kleinen'
   lecturer: 'Prof. Kleinen'
@@ -27,3 +29,5 @@ focuses in International Media and Computing: Web Technology,
 Visual Computing and Game Technology.
 Have a look at the [tentative schedule](schedule) to
 see how this breaks down.
+
+
