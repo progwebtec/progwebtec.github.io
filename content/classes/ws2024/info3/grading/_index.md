@@ -9,11 +9,12 @@ draft: false
 The Exam for Info3 (Modulprüfung) consists of two Parts (Teilmodulprüfungen):
 
 - written Moodle Exam at the end of term (PZ1) or start of next term (PZ2): 50 Points
-- Labs + Optional Showtime Lab: 55 Points
+- Labs + Optional Showtime Lab: 50 Points
 
-Points for the two Parts will be added for the Percentage (yes, 105% are possible)
+Points for the two Parts will be added for the Percentage 
 and the grade mapped according to the [Grading Scale](../../../../studies/grading/grading-scale).
 
+{{< comment >}}
 ### Lab Grading
 
 You need to work on the labs in Groups of 3-4 students and prepare a 
@@ -30,6 +31,7 @@ come and talk to me.
 Each Group may hand in one Lab Report at the end of term - consult the schedule for
 the Late Lab Review date.
 
+{{< /comment >}}
 ## Exam
 
 There will be a 2-hour online examination at the end of the semester.

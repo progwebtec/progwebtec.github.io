@@ -17,7 +17,7 @@ courseNavExt:
   link: https://lsf.htw-berlin.de/qisserver/rds?state=wplan&act=stg&pool=stg&show=plan&P.vx=kurz&r_zuordabstgv.semvonint=1&r_zuordabstgv.sembisint=4&k_abstgv.abstgvnr=312
 params:
   author: 'Barne Kleinen'
-  lecturer: 'Prof. Kleinen'
+  lecturer: 'Prof. Kleinen e.a.'
 ---
 
 ## Welcome!

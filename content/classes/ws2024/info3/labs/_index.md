@@ -6,9 +6,9 @@ CourseNav: Labs
 draft: true
 ---
 
-## Lab Overview
+Lab Lecturer: Linda Fernsel
 
-{{< subpages  >}}
+{{< comment >}}
 ## Your time, your progress, your happyness, your responsibility
  You study for your own profit and you spend a lot of time on it. So you are expected to take responsibility for your own learning and happyness, that includes
 * asking for help when you need it
@@ -55,3 +55,4 @@ I trust you to have a feeling for what belongs in a good report. The following r
 * You write either in German or English, you don't mix languages.
 
 
+{{< /comment >}}

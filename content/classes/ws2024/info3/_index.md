@@ -6,7 +6,7 @@ aliases: /info3/
 weight: 10
 params:
   author: 'Barne Kleinen'
-  lecturer: 'Prof. Kleinen'
+  lecturer: 'Prof. Kleinen & Linda Fernsel (Labs)'
 
 # ersetzt durch CourseNav: in pages
 #
