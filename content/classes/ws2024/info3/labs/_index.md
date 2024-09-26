@@ -4,9 +4,9 @@ author: kleinen
 weight: 30
 CourseNav: Labs
 draft: true
+params:
+  lecturer: 'Linda Fernsel'
 ---
-
-Lab Lecturer: Linda Fernsel
 
 {{< comment >}}
 ## Your time, your progress, your happyness, your responsibility
