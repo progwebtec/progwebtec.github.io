@@ -13,7 +13,7 @@ port=4000
 baseURL=http://localhost:$(port)
 
 hugo :  node_modules_install open # open_current # open_m1 # openH
--  hugo --navigateToChanged --buildDrafts --baseURL "$(baseURL)"  -p $(port) server
+-  export HUGO_MODULE_REPLACEMENTS="github.com/progwebtec/classes-module -> ../../classes-module" && hugo --navigateToChanged --buildDrafts --baseURL "$(baseURL)"  -p $(port) server
 
 open:
 - open $(baseURL)

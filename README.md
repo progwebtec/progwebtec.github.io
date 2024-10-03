@@ -23,6 +23,7 @@ to build the site locally, you need both.
 
 - node and npm: https://nodejs.org/en/download/package-manager 
 - hugo: https://gohugo.io/installation/ 
+- go: https://go.dev/doc/install
 
 Hugo is a static web site generator. If you are new to hugo,
 you may want to read more about it, e.g.
@@ -32,11 +33,14 @@ you may want to read more about it, e.g.
 
 ### Quickstart
 
+#### initial setup
 
 ```sh
 git clone --recurse-submodules git@github.com:progwebtec/progwebtec.github.io.git
+git clone git@github.com:progwebtec/classes-module.git
 cd progwebtec.github.io
 npm install
+export HUGO_MODULE_REPLACEMENTS="github.com/progwebtec/classes-module -> ../../classes-module"
 hugo --navigateToChanged --buildDrafts --baseURL "http://localhost:4000"  -p 4000 server
 ```
 
@@ -46,14 +50,36 @@ Then open http://localhost:4000 in your browser.
 
 ```sh
     git clone --recurse-submodules git@github.com:progwebtec/progwebtec.github.io.git
+    git clone git@github.com:progwebtec/classes-module.git
     cd progwebtec.github.io
     make
 ```
 
 Check out the Makefile for more useful commands.
 
-#### Classes are not in a Hugo Module
 
-https://www.youtube.com/watch?v=r0-3Hk5QOo4
+After initial setup, you just need to run
+```
+export HUGO_MODULE_REPLACEMENTS="github.com/progwebtec/classes-module -> ../../classes-module"
+hugo --navigateToChanged --buildDrafts --baseURL "http://localhost:4000"  -p 4000 server
+```
 
-go mod init - in project that imports as well as module
+or 
+
+```
+make
+```
+if using make.
+
+#### Classes are now in an own git repo included as Hugo Module!
+
+The classes have been moved to an own github repo https://github.com/progwebtec/classes-module
+
+To enable local changes in the classes-module, you need to clone it and
+set the HUGO_MODULE_REPLACEMENTS environment variable to make hugo using this
+local directory rather than the module downloaded from github.
+
+Every push to the main branch in the classes-module also triggers a full deploy on 
+progwebtec.github.io and bkleinen.github.io
+
+
