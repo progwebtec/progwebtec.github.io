@@ -51,3 +51,9 @@ Then open http://localhost:4000 in your browser.
 ```
 
 Check out the Makefile for more useful commands.
+
+#### Classes are not in a Hugo Module
+
+https://www.youtube.com/watch?v=r0-3Hk5QOo4
+
+go mod init - in project that imports as well as module

@@ -9,10 +9,20 @@ enableGitInfo = true
 canonifyURLs = true
 ignoreFiles = ['README\.MD$', 'readme\.md$']
 staticDir2 = ['static-snippets']
+
 [module]
   [[module.mounts]]
     source = "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
     target = "assets/js/bootstrap.bundle.min.js"
+
+  [[module.imports]]
+    path = '../classes-module'
+    #path = 'github.com/progwebtec/courses-module'
+    disabled = false
+
+  [[module.imports.mounts]]
+    source = "content/classes"
+    target="content/classes"
 
 [params]
   subTitle = 'Website of the Programming and Web Technology Group @ IMI '
