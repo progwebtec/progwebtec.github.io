@@ -95,3 +95,26 @@ ifneq ($(current_branch),main)
 - echo $(ERR)
 endif
 
+docker_build : 
+- hugo --destination "./public_html_local" --buildFuture --buildDrafts --cleanDestinationDir  --baseURL "https://localhost/" 
+- hugo --destination "./public_html" --minify --environment progwebtec --baseURL "https://progwebtec.f4.htw-berlin.de/"
+
+docker : docker_build
+- docker compose up -d 
+
+docker_bash :
+- docker compose exec webserver bash
+
+ssh_prod :
+- ssh local@progwebtec.f4.htw-berlin.de
+# - scp local@progwebtec.f4.htw-berlin.de
+
+clear_logs_prod:
+- ssh local@progwebtec.f4.htw-berlin.de "./clear_logs.sh"
+
+clear_logs:
+- sudo rm container_logs/nginx/access.log
+- sudo rm container_logs/nginx/error.log
+
+open_prod:
+- open https://progwebtec.f4.htw-berlin.de/

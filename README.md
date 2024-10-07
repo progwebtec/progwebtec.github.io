@@ -83,3 +83,39 @@ Every push to the main branch in the classes-module also triggers a full deploy 
 progwebtec.github.io and bkleinen.github.io
 
 
+## Nginx
+
+- nginx image: https://hub.docker.com/_/nginx
+- docker run --name some-nginx -v ./public:/usr/share/nginx/html:ro -d nginx
+
+### some useful commands:
+
+```
+docker run --rm --entrypoint=ls nginx -lart /etc/nginx/conf.d
+docker run --rm --entrypoint=cat nginx /etc/nginx/conf.d/de
+fault.conf > nginx/default.conf
+
+```
+
+### self-signed certificate
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-debian-10
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt
+
+**WICHTIG:** Hier servername eintragen
+Common Name (e.g. server FQDN or YOUR name) []:progwebtec.f4.htw-berlin.de
+
+sudo openssl dhparam -out dhparam.pem 4096
+
+sudo openssl dhparam -out dhparam.pem 4096
+
+
+## ipv6
+
+- disabled on virtual machines
+
+
+webserver  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+webserver  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+

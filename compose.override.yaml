@@ -1,0 +1,10 @@
+services:
+  webserver:
+     volumes:
+         - ./public_html_local:/usr/share/nginx/html
+     environment:
+        - NGINX_HOST="localhost"
+        - NGINX_CERT=nginx-selfsigned.crt
+        - NGINX_KEY=nginx-selfsigned.key
+     restart: always
+

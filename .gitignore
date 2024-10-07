@@ -6,3 +6,8 @@ node_modules/
 .hugo_build.lock
 temp/
 tmp/
+public_html/
+container_logs/
+!container_logs/.keep
+nginx/ssl/
+public_html_local/
