@@ -94,7 +94,7 @@ jobs:
           git config user.email "action@github.com"
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}"
-          git push https://github.com/progwebtec/staging.git hugo_staging
+           git push https://${{ secrets.STAGING_TOKEN }}@github.com/progwebtec/staging.git hugo_staging
 
       - name: Deploy to GitHub Pages
         id: deployment
