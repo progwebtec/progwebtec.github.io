@@ -2,11 +2,11 @@ name: Deploy Production / HTW
 
 on:
   workflow_dispatch:
-  push:
+  #push:
   #   tags:
   #     - 'v*'
-    branches:
-       - 'nginx'
+  # branches:
+  #    - 'nginx'
 jobs:
   deploy:
     if: github.ref != 'refs/heads/main'

@@ -1,0 +1,77 @@
+name: Deploy Production / Github
+
+on:
+  push:
+    tags:
+      - 'v*' 
+  repository_dispatch:
+    types: ["classes-module-changed"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true 
+      
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Install Bootstrap
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+      - run: |
+            npm install
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Write Git Info
+        run: bin/hugo_deployment/gitversion.sh ${{ github.ref }} ${{ github.sha }} "${{ github.workflow }}"
+
+      - name: Build Hugo Site
+        run: |
+          hugo mod get github.com/progwebtec/classes-module
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+    
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+            path: './public/'
+
+  deploy:
+    if: startsWith(github.ref, 'refs/tags/')
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          publish_dir: './public'
+
+      - name: Cache Hugo modules and NPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ~/.cache/hugo
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-

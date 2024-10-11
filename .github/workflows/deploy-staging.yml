@@ -1,0 +1,101 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - main
+      - new_deployment_script
+    tags-ignore:
+      - 'v*'
+  repository_dispatch:
+    types: ["classes-module-changed"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true 
+      
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Install Bootstrap
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+      - run: |
+            npm install
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Write Git Info
+        run: bin/hugo_deployment/gitversion.sh ${{ github.ref }} ${{ github.sha }} "${{ github.workflow }}"
+
+      - name: Build Hugo Site
+        run: |
+          hugo mod get github.com/progwebtec/classes-module
+          hugo --minify --destination ./public --baseURL "https://progwebtec.github.io/staging/"
+
+      - name: Upload Built Files
+        uses: actions/upload-artifact@v3
+        with:
+          name: public-files
+          path: ./public/
+    
+  deploy:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/new_deployment_script'
+    environment:
+        name: github-pages
+        url: "https://progwebtec.github.io/staging/"
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download Built Files
+        uses: actions/download-artifact@v3
+        with:
+          name: public-files
+          path: ./public
+    
+      - name: Checkout External Repository
+        uses: actions/checkout@v3
+        with:
+          repository: progwebtec/staging
+          path: staging
+  
+      - name: Copy Built Files to Staging Repo
+        run: |
+          mkdir -p staging/public
+          cp -r ./public/* staging/public/ 
+
+      - name: Checkout the branch
+        run: |
+          cd staging
+          git checkout -b hugo_staging || git checkout hugo_staging
+
+      - name: Commit and Push to Staging Repository
+        run: |
+          cd staging
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add public
+          git commit -m "Deploy to Staging from ${{ github.sha }}"
+          git push https://github.com/progwebtec/staging.git hugo_staging
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
