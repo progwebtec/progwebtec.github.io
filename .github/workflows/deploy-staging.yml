@@ -90,11 +90,13 @@ jobs:
       - name: Commit and Push to Staging Repository
         run: |
           cd staging
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}"
-           git push https://${{ secrets.STAGING_TOKEN }}@github.com/progwebtec/staging.git hugo_staging
+          git push https://${STAGING_TOKEN}@github.com/progwebtec/staging.git hugo_staging
+        env:
+          STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}
 
       - name: Deploy to GitHub Pages
         id: deployment
