@@ -97,7 +97,7 @@ jobs:
         run: |
           echo "STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}"
           echo "Permissions:"
-          curl -H "Authorization: token ${{ secrets.STAGING_TOKEN }}" https://api.github.com/repos/progwebtec/staging/collaborators/github-actions[bot]/permission
+          curl -H "Authorization: token ${{ secrets.STAGING_TOKEN }}" https://api.github.com/repos/progwebtec/staging/collaborators/github-actions%5Bbot%5D/permission
 
       - name: Commit and Push to Staging Repository
         run: |
