@@ -76,7 +76,6 @@ jobs:
         with:
           repository: progwebtec/staging
           path: staging
-          token: ${{ secrets.STAGING_TOKEN }}
   
       - name: Copy Built Files to Staging Repo
         run: |
@@ -92,12 +91,6 @@ jobs:
         run: |
           cd staging
           git remote -v
-
-      - name: Check permissions
-        run: |
-          echo "STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}"
-          echo "Permissions:"
-          curl -H "Authorization: token ${{ secrets.STAGING_TOKEN }}" https://api.github.com/repos/progwebtec/staging/collaborators/github-actions%5Bbot%5D/permission
 
       - name: Commit and Push to Staging Repository
         run: |
