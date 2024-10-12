@@ -76,6 +76,7 @@ jobs:
         with:
           repository: progwebtec/staging
           path: staging
+          token: ${{ secrets.PAT_TOKEN }}
   
       - name: Copy Built Files to Staging Repo
         run: |
@@ -87,14 +88,16 @@ jobs:
           cd staging
           git checkout -b hugo_staging || git checkout hugo_staging
 
-      - name: Debug Token
-        run: |
-          echo "STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}"
-
       - name: Check Remote URL
         run: |
           cd staging
           git remote -v
+
+      - name: Check permissions
+        run: |
+          echo "STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}"
+          echo "Permissions:"
+          curl -H "Authorization: token ${{ secrets.STAGING_TOKEN }}" https://api.github.com/repos/progwebtec/staging/collaborators/github-actions[bot]/permission
 
       - name: Commit and Push to Staging Repository
         run: |
@@ -104,8 +107,6 @@ jobs:
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}"
           git push origin hugo_staging
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         id: deployment
