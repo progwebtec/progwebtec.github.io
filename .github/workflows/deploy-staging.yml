@@ -87,6 +87,15 @@ jobs:
           cd staging
           git checkout -b hugo_staging || git checkout hugo_staging
 
+      - name: Debug Token
+        run: |
+          echo "STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}"
+
+      - name: Check Remote URL
+        run: |
+          cd staging
+          git remote -v
+
       - name: Commit and Push to Staging Repository
         run: |
           cd staging
@@ -94,9 +103,9 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}"
-          git push https://${STAGING_TOKEN}@github.com/progwebtec/staging.git hugo_staging
+          git push origin hugo_staging
         env:
-          STAGING_TOKEN: ${{ secrets.STAGING_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         id: deployment
