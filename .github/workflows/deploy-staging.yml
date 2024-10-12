@@ -76,7 +76,7 @@ jobs:
         with:
           repository: progwebtec/staging
           path: staging
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.STAGING_TOKEN }}
   
       - name: Copy Built Files to Staging Repo
         run: |
