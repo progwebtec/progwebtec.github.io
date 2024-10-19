@@ -96,7 +96,10 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}"
-          git push ${{ secrets.STAGING_DEPLOY_KEY }}@github.com/progwebtec/staging.git hugo_staging
+          GIT_SSH_COMMAND="ssh -i ${{ secrets.STAGING_DEPLOY_KEY }} -o StrictHostKeyChecking=no" git push git@github.com:progwebtec/staging.git hugo_staging
+
+
+     #     git push ${{ secrets.STAGING_DEPLOY_KEY }}@github.com/progwebtec/staging.git hugo_staging
 
       - name: Deploy to GitHub Pages
         id: deployment
