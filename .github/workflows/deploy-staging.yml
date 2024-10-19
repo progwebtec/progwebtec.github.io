@@ -89,6 +89,11 @@ jobs:
           cd staging
           git remote -v
 
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.STAGING_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
       - name: Commit and Push to Staging Repository
         run: |
           cd staging
@@ -96,10 +101,11 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}"
-          git push https://${{ secrets.STAGING_DEPLOY_KEY }}@github.com/progwebtec/staging.git hugo_staging
+          git remote set-url origin git@github.com:progwebtec/staging.git  # Set SSH URL
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
 
 
-     #     git push ${{ secrets.STAGING_DEPLOY_KEY }}@github.com/progwebtec/staging.git hugo_staging
+     #     git push https://${{ secrets.STAGING_DEPLOY_KEY }}@github.com/progwebtec/staging.git hugo_staging
 
       - name: Deploy to GitHub Pages
         id: deployment
