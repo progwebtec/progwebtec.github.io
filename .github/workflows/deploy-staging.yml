@@ -91,8 +91,10 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-          echo "${{ secrets.STAGING_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Commit and Push to Staging Repository
         run: |
