@@ -79,6 +79,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: progwebtec/staging
+          ssh-key: ${{ secrets.SSH_STAGING_DEPLOY_KEY }}
           path: staging
   
       - name: Copy Built Files to Staging Repo
@@ -89,6 +90,7 @@ jobs:
       - name: Checkout the branch
         run: |
           cd staging
+          git fetch origin hugo_staging:hugo_staging
           git checkout -b hugo_staging || git checkout hugo_staging
 
       - name: Check Remote URL
