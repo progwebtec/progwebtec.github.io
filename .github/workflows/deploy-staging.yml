@@ -80,8 +80,6 @@ jobs:
         with:
           repository: progwebtec/staging
           path: staging
-          ref: hugo_staging
-          fetch-depth: 0
   
       - name: Clean Staging Public Directory
         run: |
@@ -95,10 +93,7 @@ jobs:
       - name: Checkout the branch
         run: |
           cd staging
-          git checkout -b hugo_staging || git checkout hugo_staging
-          git fetch origin hugo_staging
-          git rebase origin/hugo_staging
-          git push origin hugo_staging
+          git checkout hugo_staging
 
       - name: Check Remote URL
         run: |
