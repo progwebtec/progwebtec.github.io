@@ -99,13 +99,13 @@ jobs:
         run: |
           cd staging
           git remote set-url origin git@github.com:progwebtec/staging.git
-          git pull
 
       - name: Commit and Push to Staging Repository
         run: |
           cd staging
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin hugo_staging
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
           GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
