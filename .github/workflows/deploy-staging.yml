@@ -98,6 +98,7 @@ jobs:
       - name: Check Remote URL
         run: |
           cd staging
+          git remote set-url origin git@github.com:progwebtec/staging.git
           git remote -v
 
       - name: Commit and Push to Staging Repository
