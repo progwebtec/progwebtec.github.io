@@ -62,54 +62,65 @@ jobs:
     needs: build
 
     steps:
-      - name: Setup SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_STAGING_DEPLOY_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - name: Download Built Files
-        uses: actions/download-artifact@v3
+      - name: Deploy to Staging on Github Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/new_deployment_script'
         with:
-          name: public-files
-          path: ./public
+          personal_token: ${{ secrets.SSH_STAGING_DEPLOY_KEY }}
+          external_repository: progwebtec/staging
+          publish_dir: ./public
+          publish_branch: hugo_staging
+          commit_message: ${{ github.event.head_commit.message }}
 
-      - name: Checkout External Repository
-        uses: actions/checkout@v3
-        with:
-          repository: progwebtec/staging
-          path: staging
 
-      - name: Clean Staging Public Directory
-        run: |
-          rm -rf staging/public/*
-  
-      - name: Copy Built Files to Staging Repo
-        run: |
-          mkdir -p staging/public
-          cp -r ./public/* staging/public/ 
-
-      - name: Checkout the branch
-        run: |
-          cd staging
-          git checkout hugo_staging
-
-      - name: Check Remote URL
-        run: |
-          cd staging
-          git remote set-url origin git@github.com:progwebtec/staging.git
-
-      - name: Commit and Push to Staging Repository
-        run: |
-          cd staging
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin hugo_staging
-          git add public
-          git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
-          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    #  - name: Setup SSH Key
+    #    run: |
+    #      mkdir -p ~/.ssh
+    #      echo "${{ secrets.SSH_STAGING_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+    #      chmod 600 ~/.ssh/id_rsa
+    #      ssh-keyscan github.com >> ~/.ssh/known_hosts
+#
+    #  - name: Download Built Files
+    #    uses: actions/download-artifact@v3
+    #    with:
+    #      name: public-files
+    #      path: ./public
+#
+    #  - name: Checkout External Repository
+    #    uses: actions/checkout@v3
+    #    with:
+    #      repository: progwebtec/staging
+    #      path: staging
+#
+    #  - name: Clean Staging Public Directory
+    #    run: |
+    #      rm -rf staging/public/*
+  #
+    #  - name: Copy Built Files to Staging Repo
+    #    run: |
+    #      mkdir -p staging/public
+    #      cp -r ./public/* staging/public/ 
+#
+    #  - name: Checkout the branch
+    #    run: |
+    #      cd staging
+    #      git checkout hugo_staging
+#
+    #  - name: Check Remote URL
+    #    run: |
+    #      cd staging
+    #      git remote set-url origin git@github.com:progwebtec/staging.git
+#
+    #  - name: Commit and Push to Staging Repository
+    #    run: |
+    #      cd staging
+    #      git config --global user.name "github-actions[bot]"
+    #      git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    #      git add public
+    #      git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
+    #      GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
+#
+    #  - name: Deploy to GitHub Pages
+    #    id: deployment
+    #    uses: actions/deploy-pages@v4
+#
