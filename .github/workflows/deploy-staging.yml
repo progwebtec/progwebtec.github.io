@@ -32,7 +32,7 @@ jobs:
           node-version: 'latest'
       - run: |
             npm install
-            
+
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -107,6 +107,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
+          git pull --rebase origin hugo_staging
           GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
 
       - name: Deploy to GitHub Pages
