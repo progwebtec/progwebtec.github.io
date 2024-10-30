@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true 
-      
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -32,7 +32,7 @@ jobs:
           node-version: 'latest'
       - run: |
             npm install
-
+            
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -52,7 +52,7 @@ jobs:
         with:
           name: public-files
           path: ./public/
-    
+
   deploy:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/new_deployment_script'
     environment:
@@ -74,13 +74,13 @@ jobs:
         with:
           name: public-files
           path: ./public
-    
+
       - name: Checkout External Repository
         uses: actions/checkout@v3
         with:
           repository: progwebtec/staging
           path: staging
-  
+
       - name: Clean Staging Public Directory
         run: |
           rm -rf staging/public/*
@@ -93,8 +93,7 @@ jobs:
       - name: Checkout the branch
         run: |
           cd staging
-          git checkout hugo_staging
-
+          git checkout -b hugo_staging || git checkout hugo_staging
       - name: Check Remote URL
         run: |
           cd staging
