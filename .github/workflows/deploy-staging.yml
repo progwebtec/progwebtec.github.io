@@ -94,6 +94,9 @@ jobs:
         run: |
           cd staging
           git checkout -b hugo_staging || git checkout hugo_staging
+          git fetch origin hugo_staging
+          git rebase origin/hugo_staging
+          git push origin hugo_staging
 
       - name: Check Remote URL
         run: |
