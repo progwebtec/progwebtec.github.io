@@ -80,6 +80,8 @@ jobs:
         with:
           repository: progwebtec/staging
           path: staging
+          ref: hugo_staging
+          fetch-depth: 0
   
       - name: Clean Staging Public Directory
         run: |
