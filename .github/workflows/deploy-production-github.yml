@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*' 
+    branches:
+      - new_deployment_script
   repository_dispatch:
     types: ["classes-module-changed"]
 
