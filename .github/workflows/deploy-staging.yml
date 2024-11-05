@@ -82,12 +82,12 @@ jobs:
 
       - name: Clean Staging Public Directory
         run: |
-          rm -rf staging/public/*
+          rm -rf staging/*
   
       - name: Copy Built Files to Staging Repo
         run: |
           mkdir -p staging/public
-          cp -r ./public/* staging/public/ 
+          cp -r ./public/* staging/
 
       - name: Checkout the branch
         run: |
