@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*' 
-    branches:
-      - new_deployment_script
   repository_dispatch:
     types: ["classes-module-changed"]
 
@@ -55,7 +53,7 @@ jobs:
             path: './public/'
 
   deploy:
-    # if: startsWith(github.ref, 'refs/tags/')
+    if: startsWith(github.ref, 'refs/tags/')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
