@@ -47,7 +47,7 @@ jobs:
           hugo --minify --destination ./public --baseURL "https://progwebtec.github.io/staging/"
 
       - name: Upload Built Files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: public-files
           path: ./public/
