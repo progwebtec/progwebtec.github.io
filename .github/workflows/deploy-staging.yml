@@ -1,0 +1,108 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - 'v*'
+  repository_dispatch:
+    types: ["classes-module-changed"]
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true 
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Install Bootstrap
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+      - run: |
+            npm install
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Write Git Info
+        run: bin/hugo_deployment/gitversion.sh ${{ github.ref }} ${{ github.sha }} "${{ github.workflow }}"
+
+      - name: Build Hugo Site
+        run: |
+          hugo mod get github.com/progwebtec/classes-module
+          hugo --minify --destination ./public --baseURL "https://progwebtec.github.io/staging/"
+
+      - name: Upload Built Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-files
+          path: ./public/
+
+  deploy:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/new_deployment_script'
+    environment:
+      name: github-pages
+      url: "https://progwebtec.github.io/staging/"
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_STAGING_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Download Built Files
+        uses: actions/download-artifact@v4
+        with:
+          name: public-files
+          path: ./public
+
+      - name: Checkout External Repository
+        uses: actions/checkout@v3
+        with:
+          repository: progwebtec/staging
+          path: staging
+
+      - name: Clean Staging Public Directory
+        run: |
+          rm -rf staging/*
+  
+      - name: Copy Built Files to Staging Repo
+        run: |
+          mkdir -p staging/public
+          cp -r ./public/* staging/
+
+      - name: Checkout the branch
+        run: |
+          cd staging
+          git checkout -b hugo_staging || git checkout hugo_staging
+
+      - name: Check Remote URL
+        run: |
+          cd staging
+          git remote set-url origin git@github.com:progwebtec/staging.git
+
+      - name: Commit and Push to Staging Repository
+        run: |
+          cd staging
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push --force origin hugo_staging
