@@ -45,6 +45,7 @@ jobs:
         run: |
           hugo mod get github.com/progwebtec/classes-module
           hugo --minify --destination ./public --baseURL "https://progwebtec.github.io/staging/"
+
       - name: Upload Built Files
         uses: actions/upload-artifact@v3
         with:
@@ -104,10 +105,9 @@ jobs:
           cd staging
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add public
+          git add .
           git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
-          git pull origin hugo_staging --rebase || echo "No changes to pull"
-          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push --force origin hugo_staging
 
       - name: Deploy to GitHub Pages
         id: deployment
