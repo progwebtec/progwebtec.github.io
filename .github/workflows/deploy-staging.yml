@@ -66,6 +66,7 @@ jobs:
           echo "${{ secrets.SSH_STAGING_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Download Built Files
         uses: actions/download-artifact@v3
         with:
@@ -86,15 +87,18 @@ jobs:
         run: |
           mkdir -p staging/public
           cp -r ./public/* staging/public/ 
+
       - name: Checkout the branch
         run: |
           cd staging
           git checkout -b hugo_staging || git checkout hugo_staging
+
       - name: Check Remote URL
         run: |
           cd staging
           git remote set-url origin git@github.com:progwebtec/staging.git
           git remote -v
+
       - name: Commit and Push to Staging Repository
         run: |
           cd staging
@@ -103,6 +107,7 @@ jobs:
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
           GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
