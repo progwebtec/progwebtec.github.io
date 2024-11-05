@@ -107,7 +107,9 @@ jobs:
           git add public
           git commit -m "Deploy to Staging from ${{ github.sha }}" || echo "Nothing to commit"
           GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" git push origin hugo_staging
-          
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+            artifact-name: public-files
