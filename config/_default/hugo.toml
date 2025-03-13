@@ -29,7 +29,7 @@ staticDir2 = ['static-snippets']
   serverencoding = "UTF-8"
   generatedLinks = true # set this to false to detect unlinked pages
   zoomBK = "https://htw-berlin.zoom.us/j/3165395630"
-  mainProductionURL = 'https://home.htw-berlin.de/~kleinen'
+  mainProductionURL = 'https://progwebtec.github.io/'
   math = false
 # rss feed
 # https://gohugo.io/templates/rss/#the-embedded-rssxml

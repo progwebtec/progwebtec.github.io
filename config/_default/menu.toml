@@ -5,12 +5,19 @@
   weight = -300
 
 [[main]]
-  weight = -289
+  identifier = 'classes'
+  name = 'Classes'
+  pageref = '/classes/ss2025s'
+  weight = -200
+
+[[main]]
+  weight = -100
   #parent = 'classes'
   # weight = 300
   identifier = 'material'
   name = 'Material'
   pageref = '/material'
+
 [[main]]
   identifier = 'debug'
   name = 'Localhost'
@@ -18,11 +25,6 @@
   weight = -301
   alert = 'primary'
 
-[[main]]
-  identifier = 'classes'
-  name = 'Classes'
-  pageref = '/classes/ws2024'
-  weight = -290
 
 
 ##
@@ -37,25 +39,26 @@
 #   weight = 10
 [[main]]
   parent = 'classes'
-  identifier = '/classes/ws2024/info3'
-  name = 'B15 Info3'
-  pageref = '/classes/ws2024/info3'
+  identifier = '/classes/ss2025/info2'
+  name = 'B7 Info 2'
+  pageref = '/classes/ss2025/info2'
   weight = 20
 
 [[main]]
   parent = 'classes'
-  identifier = '/classes/ws2024/m1-web'
+  identifier = '/classes/ss2025/m1'
   name = 'M1 Mediaprogramming'
-  pageref = '/classes/ws2024/m1-web'
+  pageref = '/classes/ss2025/m1'
   weight = 30
 
 
 [[main]]
   parent = 'classes'
-  identifier = '/classes/ws2024'
-  name = 'All WS 2024/25'
-  pageref = '/classes/ws2024'
+  identifier = '/classes/ss2025'
+  name = 'All SoSe 2025'
+  pageref = '/classes/ss2025'
   weight = 40
+
 [[main]]
   parent = 'classes'
   identifier = '/classes/'
