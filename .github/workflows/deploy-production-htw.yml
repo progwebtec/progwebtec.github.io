@@ -2,6 +2,8 @@ name: Deploy Production / HTW
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: ["classes-module-changed"]
   push:
   #   tags:
   #     - 'v*'
