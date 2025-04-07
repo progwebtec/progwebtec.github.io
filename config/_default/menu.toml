@@ -30,34 +30,40 @@
 ##
 ## Classes Submenu
 ##
-
-# [[main]]
-#   parent = 'classes'
-#   identifier = '/classes/ws2024/info1'
-#   name = 'B1 Info1'
-#   pageref = '/classes/ws2024/info1'
-#   weight = 10
 [[main]]
   parent = 'classes'
   identifier = '/classes/ss2025/info2'
-  name = 'B7 Info 2'
+  name = 'B7 Informatik 2'
   pageref = '/classes/ss2025/info2'
+  weight = 10
+
+[[main]]
+  parent = 'classes'
+  identifier = '/classes/ss2025/wt1'
+  name = 'B21 WT1 Verteilte Systeme'
+  pageref = '/classes/ss2025/wt1'
   weight = 20
 
 [[main]]
   parent = 'classes'
   identifier = '/classes/ss2025/m1'
-  name = 'M1 Mediaprogramming'
+  name = 'M1 Media Programming'
   pageref = '/classes/ss2025/m1'
   weight = 30
 
+[[main]]
+  parent = 'classes'
+  identifier = '/classes/ss2025/buddyprogramm'
+  name = 'AWE Buddyprogramm'
+  pageref = '/classes/ss2025/buddyprogramm'
+  weight = 40
 
 [[main]]
   parent = 'classes'
   identifier = '/classes/ss2025'
   name = 'All SoSe 2025'
   pageref = '/classes/ss2025'
-  weight = 40
+  weight = 50
 
 [[main]]
   parent = 'classes'
